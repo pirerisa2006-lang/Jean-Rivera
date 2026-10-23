@@ -1,0 +1,66 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Jean Rivera</title>
+{% endblock %}
+
+{% block background %} {% static 'core/img/home-bg.jpg' %} {% endblock %}
+
+
+{% block headers %}
+    <h1>Nuestro equipo</h1>
+{% endblock %}
+
+{% block content %}
+
+    <header class="masthead" style="background-color: #212529; padding-top: 2rem; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="text-uppercase text-white font-weight-bold">
+                    Personas
+                </h2>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-section bg-light" style="padding: 5rem 0;">
+        <div class="container">
+            <div class="row justify-content-center">
+                {% for persona in personas %}
+                    <div class="col-md-8 mb-4">
+                        <div class="card shadow-sm border-0" style="background-color: #e9ecef;">
+                            <div class="card-body text-center p-5">
+
+                                <h3 class="card-title font-weight-bold">{{ persona.nombre }} {{ persona.apellidos }}</h3>
+
+                                {% if persona.titulo_academico %}
+                                    <h5 class="card-subtitle mb-4 text-muted">{{ persona.titulo_academico }}</h5>
+                                {% endif %}
+
+                                <div class="mt-4" style="text-align: justify;">
+                                    <p class="card-text"><strong>Biografía:</strong> {{ persona.biografia }}</p>
+                                    <p class="card-text"><strong>Dedicación:</strong> {{ persona.dedicacion }}</p>
+                                    <p class="card-text"><strong>Dirección:</strong> {{ persona.direccion }}</p>
+
+                                    <p class="card-text mt-4">
+                                        <strong>Contacto:</strong>
+                                        <a href="mailto:{{ persona.correo }}">{{ persona.correo }}</a>
+                                        | {{ persona.telefono }}
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-12 text-center">
+                        <p class="lead">No hay personas registradas en este momento.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
